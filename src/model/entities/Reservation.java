@@ -41,9 +41,20 @@ public class Reservation {
 				
 	}
 	
-	public void updateDates(Date checkIn,  Date checkOut) {
+	public String updateDates(Date checkIn,  Date checkOut) {
+		
+		Date now = new Date();
+		if(checkIn.before(now) || checkOut.before(now)) {
+			return "error, data não pode ser menor que a data atual: ";
+		}
+		if(!checkOut.after(checkIn)) {
+			return "Error, data de checkout tem que ser maior que a data de check-in";
+		} 
+
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		
+		return null;
 	}
 	
 	@Override
